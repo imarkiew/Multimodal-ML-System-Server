@@ -1,0 +1,11 @@
+@(startRoute: String)(implicit request: RequestHeader)
+
+@main("Diagnosis support system") {
+
+    <div id="content"></div>
+    <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
+    <input type="hidden" id="loginRoute" value="@startRoute">
+    <input type="hidden" id="validateRoute" value="@routes.LogInController.validate()">
+
+    <script src="@routes.Assets.versioned("javascripts/login.js")"></script>
+}
