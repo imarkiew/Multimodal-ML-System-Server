@@ -12,7 +12,7 @@ import org.mindrot.jbcrypt.BCrypt.checkpw
 @Singleton
 class LoginController @Inject()(userDao: UserDao, controllerComponents: ControllerComponents)(implicit executionContext: ExecutionContext) extends AbstractController(controllerComponents){
 
-  import models.UserImplicits._
+  import models.implicits.UserImplicits._
 
   def index = Action { implicit request =>
     Ok(views.html.hidden(routes.LoginController.login().toString))
