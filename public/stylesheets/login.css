@@ -12,16 +12,18 @@ html, body{
 
 .container{
     height: 100%;
-    top: 0%;
-    right: 13%;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
 .card{
-    height: 400px;
+    height: 40%;
     margin-top: auto;
     margin-bottom: auto;
-    width: 400px;
+    width: 40%;
     background-color: rgba(0,0,0,0.5) !important;
 }
 
@@ -30,7 +32,7 @@ html, body{
 }
 
 .input-group-prepend span{
-    width: 50px;
+    width: 100%;
     background-color: #FFC312;
     color: black;
     border:0 !important;
@@ -42,22 +44,14 @@ input:focus{
 
 }
 
-.remember{
+.text{
     color: white;
-}
-
-.remember input
-{
-    width: 20px;
-    height: 20px;
-    margin-left: 15px;
-    margin-right: 5px;
 }
 
 .login_btn{
     color: black;
     background-color: #FFC312;
-    width: 100px;
+    width: 25%;
 }
 
 .login_btn:hover{
@@ -73,11 +67,6 @@ input:focus{
     color: lightpink;
 }
 
-
-/*.links{*/
-    /*color: green;*/
-/*}*/
-
-/*.links a{*/
-    /*margin-left: 4px;*/
-/*}*/
+.error {
+    color: red;
+}
