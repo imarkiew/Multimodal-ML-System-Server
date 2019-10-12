@@ -1,60 +1,45 @@
-@()(implicit request: RequestHeader)
+@(loginStatus: Option[String])(implicit request: RequestHeader)
 
 <!--Adapted example from https://bootsnipp.com/snippets/vl4R7-->
-<!DOCTYPE html>
-<html>
-    <head>
-            <!--Bootsrap 4 CDN-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-            <!--Fontawesome CDN-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-            <!--Custom styles-->
-        <link rel="stylesheet" type="text/css"  href="@routes.Assets.versioned("stylesheets/login.css")">
-    </head>
-    <body>
-        <div class="container">
-            <div class="d-flex justify-content-center h-100">
-                <div class="card">
-                    <div class="card-header" align="center">
-                        <h3>Sign In</h3>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="username" id="username">
-
-                            </div>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                </div>
-                                <input type="password" class="form-control" placeholder="password" id="password">
-                            </div>
-                            <div class="row align-items-center remember">
-                                <input type="checkbox">Remember Me
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Login" class="btn float-right login_btn" onclick="login()">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-footer align-items-center remember">
-                        Forgot your password or username ?
-                        <br>
-                        Don't have an account ?
-                        <br>
-                        Something isn't working right ?
-                        <div class="d-flex justify-content-center link">
-                            <a href="mailto:igomar067@@gmail.com">Contact administrator</a>
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header" align="center">
+                <h3>Sign In</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
+                        <input type="text" class="form-control" placeholder="username" id="username">
+
                     </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="password" id="password">
+                    </div>
+                    <div class="float-right error">
+                        <b>@loginStatus</b>
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Login" class="btn float-left login_btn" onclick="login()">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer align-items-center text">
+                Forgot your password or username ?
+                <br>
+                Don't have an account ?
+                <br>
+                Something isn't working right ?
+                <div class="d-flex justify-content-center link">
+                    <a href="mailto:igomar067@@gmail.com">Contact administrator</a>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>

@@ -5,8 +5,17 @@ version := "1.0"
 scalaVersion := "2.11.12"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
+scalaSource in ThisScope := baseDirectory.value
 
-libraryDependencies += guice
+libraryDependencies ++= Seq(
+  guice,
+  "com.typesafe.play" %% "play-json" % "2.7.4",
+  "com.typesafe.play" %% "play-slick" % "4.0.2",
+  "com.typesafe.play" %% "play-slick-evolutions" % "4.0.2",
+  "org.mindrot" % "jbcrypt" % "0.4",
+  "mysql" % "mysql-connector-java" % "8.0.17",
+  "org.mindrot" % "jbcrypt" % "0.4"
+)
 
 //assemblyMergeStrategy in assembly := {
 //  case x if x.startsWith("reference.conf") => MergeStrategy.concat
