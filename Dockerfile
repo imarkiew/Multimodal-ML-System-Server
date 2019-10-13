@@ -5,4 +5,4 @@ ARG assetsJarName=multimodal-ml-system-server_2.11-1.0-web-assets.jar
 ENV jarNameEnvValue=$jarName
 COPY target/scala-2.11/${jarName} ${jarName}
 COPY target/scala-2.11/${assetsJarName} ${assetsJarName}
-CMD ["sh", "-c", "java -jar -Dplay.crypto.secret=${PLAY_SERVER_SECRET_KEY} ${jarNameEnvValue}"]
+CMD ["sh", "-c", "java -jar -Dhttp.port=disabled -Dconfig.file=./application.prod.conf ${jarNameEnvValue}"]
