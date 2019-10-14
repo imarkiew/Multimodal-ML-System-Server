@@ -5,7 +5,7 @@ import javax.inject.{Inject, Singleton}
 import models.dto.{User, UserCredentials}
 import play.api.mvc.{AbstractController, ControllerComponents}
 import play.api.libs.json._
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
 import org.mindrot.jbcrypt.BCrypt.checkpw
 
 
@@ -14,12 +14,12 @@ class LoginController @Inject()(userDao: UserDao, controllerComponents: Controll
 
   import models.implicits.UserImplicits._
 
-  def index = Action { implicit request =>
-    Ok(views.html.hidden(routes.LoginController.login().toString))
+  def index = Action.async { implicit request =>
+    Future(Ok(views.html.hidden(routes.LoginController.login().toString)))
   }
 
-  def login = Action { implicit request =>
-    Ok(views.html.login(None))
+  def login = Action.async { implicit request =>
+    Future(Ok(views.html.login(None)))
   }
 
   def validate = Action.async { implicit request =>
