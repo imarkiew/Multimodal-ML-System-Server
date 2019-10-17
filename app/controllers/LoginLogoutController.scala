@@ -10,7 +10,7 @@ import org.mindrot.jbcrypt.BCrypt.checkpw
 
 
 @Singleton
-class LoginController @Inject()(userDao: UserDao, controllerComponents: ControllerComponents)(implicit executionContext: ExecutionContext)
+class LoginLogoutController @Inject()(userDao: UserDao, controllerComponents: ControllerComponents)(implicit executionContext: ExecutionContext)
   extends AbstractController(controllerComponents) {
 
   import models.implicits.UserImplicits._
@@ -18,8 +18,8 @@ class LoginController @Inject()(userDao: UserDao, controllerComponents: Controll
   def index = Action.async { implicit request =>
 
     performAction { _ =>
-      Future(Ok(views.html.hidden(routes.LoginController.cockpit().toString)))
-    }(Future(Ok(views.html.hidden(routes.LoginController.login().toString))))
+      Future(Ok(views.html.hidden(routes.LoginLogoutController.cockpit().toString)))
+    }(Future(Ok(views.html.hidden(routes.LoginLogoutController.login().toString))))
   }
 
   def login = Action.async { implicit request =>

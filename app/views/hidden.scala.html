@@ -5,7 +5,7 @@
     <div id="content"></div>
     <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
     <input type="hidden" id="loginRoute" value="@startRoute">
-    <input type="hidden" id="validateRoute" value="@routes.LoginController.validate()">
+    <input type="hidden" id="validateRoute" value="@routes.LoginLogoutController.validate()">
 
-    <script src="@routes.Assets.versioned("javascripts/login.js")"></script>
+    <script src="@routes.Assets.versioned("javascripts/main.js")"></script>
 }
