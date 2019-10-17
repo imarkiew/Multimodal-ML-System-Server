@@ -5,7 +5,7 @@
 GET     /                          controllers.LoginController.index
 GET     /login                     controllers.LoginController.login
 POST    /validate                  controllers.LoginController.validate
-#GET     /cockpit                   controllers.LoginController.cockpit
+GET     /cockpit                   controllers.LoginController.cockpit
 
 # Map static resources from the /public folder to the /assets URL path
 #GET     /assets/*file                 controllers.Assets.at(file)

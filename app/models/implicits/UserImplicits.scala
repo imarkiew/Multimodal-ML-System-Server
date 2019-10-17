@@ -7,9 +7,9 @@ import play.api.libs.json.{Reads, __}
 
 object UserImplicits {
 
-  implicit val userReads: Reads[UserCredentials] = (
-    (__ \ "username").read[String] and
-      (__ \ "password").read[String]
+  implicit val userCredentialsReader: Reads[UserCredentials] = (
+    (__ \ "username").readNullable[String] and
+      (__ \ "password").readNullable[String]
     )(UserCredentials.apply _)
 
 }
