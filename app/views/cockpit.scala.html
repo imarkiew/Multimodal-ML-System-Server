@@ -1,5 +1,10 @@
-@()(implicit request: RequestHeader)
+@(username: String)(implicit request: RequestHeader)
 
-<div>
-    <b>BBB</b>
+<div class="topright">
+    <div class="text">
+        Logged as: <b>@username</b>
+    </div>
+    <a href="@routes.LoginLogoutController.logout()">
+        <input type="button" value="Login" class="btn btn-info btn-lg" onclick="logout()">
+    </a>
 </div>

@@ -14,10 +14,10 @@ class AjaxRequestsFilter @Inject()(implicit val mat: Materializer, executionCont
   def apply(nextFilter: RequestHeader => Future[Result])(requestHeader: RequestHeader): Future[Result] = {
 
     val isAjaxRequest = requestHeader.headers.get("X-Requested-With").contains("XMLHttpRequest")
-    val isIndexOrAssetsRequest = requestHeader.uri == routes.LoginLogoutController.index().toString ||
-      requestHeader.uri.startsWith("/versionedAssets")
+    val isIndexOrAssetsOrLogoutRequest = requestHeader.uri == routes.LoginLogoutController.index().toString ||
+      requestHeader.uri.startsWith("/versionedAssets") || requestHeader.uri == "/logout"
 
-    if(isAjaxRequest || isIndexOrAssetsRequest){
+    if(isAjaxRequest || isIndexOrAssetsOrLogoutRequest){
       nextFilter(requestHeader)
     } else {
       Future(Ok(views.html.forbidden()))

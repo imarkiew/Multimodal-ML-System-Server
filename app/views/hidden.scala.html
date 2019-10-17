@@ -6,6 +6,7 @@
     <input type="hidden" id="csrfToken" value="@helper.CSRF.getToken.value">
     <input type="hidden" id="loginRoute" value="@startRoute">
     <input type="hidden" id="validateRoute" value="@routes.LoginLogoutController.validate()">
+    <input type="hidden" id="logoutRoute" value="@routes.LoginLogoutController.logout()">
 
     <script src="@routes.Assets.versioned("javascripts/main.js")"></script>
 }

@@ -29,13 +29,13 @@ class LoginLogoutController @Inject()(userDao: UserDao, controllerComponents: Co
   def validate = Action.async { implicit request =>
 
     performAction { _ =>
-      Future(Ok(views.html.cockpit()))
+      Future(Ok(views.html.cockpit(request.session.get("username").get)))
     }({
       val requestVals = getUserCredentialsFromRequestBody(request)
       userDao
         .getUser(requestVals.username.get)
         .map {
-          case Some(user: User) if checkpw(requestVals.password.get, user.passwordHash) => Ok(views.html.cockpit())
+          case Some(user: User) if checkpw(requestVals.password.get, user.passwordHash) => Ok(views.html.cockpit(user.username))
             .withSession("username" -> user.username, "Csrf-Token" -> play.filters.csrf.CSRF.getToken.get.value)
           case _ => Ok(views.html.login(Some("Invalid username or password")))
         }
@@ -45,7 +45,11 @@ class LoginLogoutController @Inject()(userDao: UserDao, controllerComponents: Co
 
   def cockpit = Action.async { implicit request =>
     performAction { _ =>
-      Future(Ok(views.html.cockpit()))
+      Future(Ok(views.html.cockpit(request.session.get("username").get)))
     }(Future(Ok(views.html.login(None))))
+  }
+
+  def logout = Action.async { implicit request =>
+    Future(Redirect(routes.LoginLogoutController.index()).withNewSession)
   }
 }
