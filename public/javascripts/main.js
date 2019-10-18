@@ -1,6 +1,9 @@
 const csrfToken = $("#csrfToken").val();
 const loginRoute = $("#loginRoute").val();
 const validateRoute = $("#validateRoute").val();
+const cockpitRoute = $("#cockpitRoute").val();
+const skinLesionsFormRoute = $("#skinLesionsFormRoute").val();
+const skinLesionsRoute = $("#skinLesionsRoute").val();
 
 
 $("#content").load(loginRoute);
@@ -30,22 +33,39 @@ login = () => {
     })
 };
 
-// Adapted example from https://www.w3schools.com/howto/howto_js_dropdown.asp
-// When the user clicks on the button, toggle between hiding and showing the dropdown content
-examinationsDropdownFunction = () => {
-    document.getElementById("examinationsDropdown").classList.toggle("show");
+$(() => {
+    $(document).on("change", "#examinationsDropdown", () => {
+
+        const selectedAction = $("#examinationsDropdown option:selected").text();
+
+        if(selectedAction === "skin-lesions") {
+            $.ajax({
+                url: skinLesionsFormRoute,
+                type: 'GET',
+                dataType: 'html',
+                async: true,
+                success: data => {
+                    $("#content").html(data);
+                }
+            })
+        } else {
+            console.log("Not implemented !");
+        }
+    });
+});
+
+returnToCockpit = () => {
+    $.ajax({
+        url: cockpitRoute,
+        type: 'GET',
+        dataType: 'html',
+        async: true,
+        success: data => {
+            $("#content").html(data);
+        }
+    })
 };
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = event => {
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
+performSkinLesions = () => {
+
 };

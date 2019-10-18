@@ -5,7 +5,6 @@ import javax.inject.{Inject, Singleton}
 import models.dto.{Examination, User}
 import models.utilities.UserCredentialsUtilities.{getUserCredentialsFromRequestBody, performAction}
 import play.api.mvc.{AbstractController, ControllerComponents}
-
 import scala.concurrent.{ExecutionContext, Future}
 import org.mindrot.jbcrypt.BCrypt.checkpw
 
@@ -18,8 +17,8 @@ class LoginLogoutController @Inject()(userDao: UserDao, controllerComponents: Co
   import models.implicits.ExaminationsImplicits._
 
   val exams = Seq(
-    Examination(11, "skin-lesions", "Patient 1", "2019-10-11 12:28:37", Map("akiec" -> 57, "ner" -> 20, "true" -> 23)),
-    Examination(5, "breast-cancer", "Patient 3", "2019-10-11 12:30:37", Map("mal" -> 60, "bem" -> 40))
+    Examination(11, "skin-lesions", Some("Patient 1"), "2019-10-11 12:28:37", Map("akiec" -> 57, "ner" -> 20, "true" -> 23)),
+    Examination(5, "breast-cancer", None, "2019-10-11 12:30:37", Map("mal" -> 60, "bem" -> 40))
   )
 
   def index = Action.async { implicit request =>

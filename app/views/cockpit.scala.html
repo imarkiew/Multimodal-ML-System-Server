@@ -8,26 +8,25 @@
         Logged as: <b>@username</b>
     </div>
 </div>
-<div class="logoutButton">
+
+<div class="logout-button">
     <a href="@routes.LoginLogoutController.logout()">
         <input type="button" value="Logout" class="btn btn-info btn-lg">
     </a>
 </div>
 
-<div class="dropdown">
-    <button onclick="examinationsDropdownFunction()" class="dropbtn">Examinations</button>
-    <div id="examinationsDropdown" class="dropdown-content">
-        @for(examination <- examinations){
-            <a href="#">@examination</a>
-        }
-    </div>
-</div>
+<select class="select-css" id="examinationsDropdown">
+    <option style="display:none;" selected>Add new examination</option>
+    @for(examination <- examinations){
+        <option>@examination</option>
+    }
+</select>
 
 <table>
     <tr>
         <th>id</th>
         <th>kind</th>
-        <th>name</th>
+        <th>title</th>
         <th>date</th>
         <th>results</th>
     </tr>
@@ -35,7 +34,7 @@
         <tr>
             <td>@examinationResult.id</td>
             <td>@examinationResult.kind</td>
-            <td>@examinationResult.name</td>
+            <td>@examinationResult.title</td>
             <td>@examinationResult.date</td>
             <td>
                 <ul>
