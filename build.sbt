@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-json" % "2.7.4",
   "com.typesafe.play" %% "play-slick" % "4.0.2",
   "com.typesafe.play" %% "play-slick-evolutions" % "4.0.2",
+  "com.typesafe" % "config" % "1.4.0",
   "org.mindrot" % "jbcrypt" % "0.4",
   "mysql" % "mysql-connector-java" % "8.0.17",
   "org.mindrot" % "jbcrypt" % "0.4"

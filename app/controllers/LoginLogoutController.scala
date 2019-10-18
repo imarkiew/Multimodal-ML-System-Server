@@ -14,6 +14,7 @@ class LoginLogoutController @Inject()(userDao: UserDao, controllerComponents: Co
   extends AbstractController(controllerComponents) {
 
   import models.implicits.UserImplicits._
+  import models.implicits.ExaminationsImplicits._
 
   def index = Action.async { implicit request =>
 

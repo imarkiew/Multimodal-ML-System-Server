@@ -41,7 +41,6 @@ html, body{
 input:focus{
     outline: 0 0 0 0  !important;
     box-shadow: 0 0 0 0 !important;
-
 }
 
 .text{
@@ -73,7 +72,61 @@ input:focus{
 
 .topright {
     position: absolute;
-    top: 8px;
-    right: 16px;
-    font-size: 18px;
+    top: 1%;
+    right: 1%;
+    font-size: 20px;
 }
+
+.logoutButton {
+    position: absolute;
+    top: 4%;
+    right: 1%;
+    font-size: 20%;
+}
+
+/*Adapted example from https://www.w3schools.com/howto/howto_js_dropdown.asp*/
+/* Dropdown Button */
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 8%;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: absolute;
+    top: 8%;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
