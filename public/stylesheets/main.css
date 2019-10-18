@@ -130,3 +130,27 @@ input:focus{
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+/*Adapted example from https://www.w3schools.com/css/css_table.asp*/
+table {
+    border-collapse: collapse;
+    width: 60%;
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    table-layout: fixed;
+}
+
+th, td {
+    text-align: left;
+    padding: 5px;
+    word-wrap:break-word;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(odd){background-color: lightgrey}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}

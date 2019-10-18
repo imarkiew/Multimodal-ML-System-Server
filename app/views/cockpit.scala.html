@@ -1,4 +1,7 @@
-@(username: String)(implicit request: RequestHeader, examinations: Seq[String])
+@import models.dto.Examination
+
+
+@(username: String, examinationsResults: Seq[Examination])(implicit request: RequestHeader, examinations: Seq[String])
 
 <div class="topright">
     <div class="text">
@@ -19,3 +22,30 @@
         }
     </div>
 </div>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>kind</th>
+        <th>name</th>
+        <th>date</th>
+        <th>results</th>
+    </tr>
+    @for(examinationResult <- examinationsResults) {
+        <tr>
+            <td>@examinationResult.id</td>
+            <td>@examinationResult.kind</td>
+            <td>@examinationResult.name</td>
+            <td>@examinationResult.date</td>
+            <td>
+                <ul>
+                    @for(result <- examinationResult.results) {
+                        <li>
+                        @result._1 - @result._2 %
+                        </li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+</table>
