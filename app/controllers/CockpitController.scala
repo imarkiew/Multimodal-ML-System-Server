@@ -14,6 +14,7 @@ class CockpitController @Inject()(controllerComponents: ControllerComponents)(im
   }
 
   def skinLesions = Action.async { implicit request =>
+    println(request.body.asJson)
     Future(Ok)
   }
 

@@ -68,4 +68,33 @@ returnToCockpit = () => {
 
 performSkinLesions = () => {
 
+    const skinLesionTitle = $("#skinLesionTitle").val();
+    const dateTime = new Date();
+    const image = $("#skinLesionFile")[0].files[0];
+    const imageName = image.name;
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+
+    reader.onloadend = function() {
+
+        const encodedImage = reader.result;
+
+        $.ajaxSetup({
+            beforeSend: xhr => {
+                xhr.setRequestHeader('Csrf-Token', csrfToken);
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: skinLesionsRoute,
+            data: JSON.stringify({skinLesionTitle, dateTime, imageName, encodedImage}),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'html',
+            async: true,
+            success: (data) => {
+                $("#content").html(data);
+            }
+        })
+    };
 };
