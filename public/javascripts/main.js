@@ -68,16 +68,16 @@ returnToCockpit = () => {
 
 performSkinLesions = () => {
 
-    const skinLesionTitle = $("#skinLesionTitle").val();
-    const dateTime = new Date();
+    const title = $("#skinLesionTitle").val();
+    const date = new Date();
     const image = $("#skinLesionFile")[0].files[0];
-    const imageName = image.name;
+    const fileName = image.name;
     const reader = new FileReader();
     reader.readAsDataURL(image);
 
     reader.onloadend = function() {
 
-        const encodedImage = reader.result;
+        const content = reader.result;
 
         $.ajaxSetup({
             beforeSend: xhr => {
@@ -88,7 +88,7 @@ performSkinLesions = () => {
         $.ajax({
             type: 'POST',
             url: skinLesionsRoute,
-            data: JSON.stringify({skinLesionTitle, dateTime, imageName, encodedImage}),
+            data: JSON.stringify({title, date, fileName, content}),
             contentType: 'application/json; charset=utf-8',
             dataType: 'html',
             async: true,

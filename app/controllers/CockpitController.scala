@@ -1,10 +1,13 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
+import models.dto.ExaminationClientInfo
 import models.utilities.UserCredentialsUtilities.performAction
 import play.api.mvc.{AbstractController, ControllerComponents}
 import scala.concurrent.{ExecutionContext, Future}
 import models.utilities.Tmp.exams
+import play.api.libs.json.Json
+import models.utilities.ExaminationsUtilities.getExaminationFromClientRequestBody
 
 
 @Singleton
@@ -24,7 +27,9 @@ class CockpitController @Inject()(controllerComponents: ControllerComponents)(im
   }
 
   def skinLesions = Action.async { implicit request =>
-    println(request.body.asJson)
+
+    val skinLesionsClientInfo = getExaminationFromClientRequestBody(request)
+    println(skinLesionsClientInfo)
     Future(Ok)
   }
 
