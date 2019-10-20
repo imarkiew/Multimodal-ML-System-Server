@@ -33,25 +33,32 @@ login = () => {
     })
 };
 
-$(() => {
-    $(document).on("change", "#examinationsDropdown", () => {
+$(document).on("change", "#examinationsDropdown", () => {
 
-        const selectedAction = $("#examinationsDropdown option:selected").text();
+    const selectedAction = $("#examinationsDropdown option:selected").text();
 
-        if(selectedAction === "skin-lesions") {
-            $.ajax({
-                url: skinLesionsFormRoute,
-                type: 'GET',
-                dataType: 'html',
-                async: true,
-                success: data => {
-                    $("#content").html(data);
-                }
-            })
-        } else {
-            console.log("Not implemented !");
-        }
-    });
+    if(selectedAction === "skin-lesions") {
+        $.ajax({
+            url: skinLesionsFormRoute,
+            type: 'GET',
+            dataType: 'html',
+            async: true,
+            success: data => {
+                $("#content").html(data);
+            }
+        })
+    } else {
+        console.log("Not implemented !");
+    }
+});
+
+$(document).on("change", "#skinLesionFile", function(){
+    if($("#skinLesionFile").val() === ''){
+        $("#ok-button").prop("disabled", true).trigger("change");
+    }
+    else{
+        $("#ok-button").prop("disabled", false).trigger("change");
+    }
 });
 
 returnToCockpit = () => {
