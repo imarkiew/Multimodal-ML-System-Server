@@ -5,7 +5,7 @@
 GET     /                          controllers.LoginLogoutController.index
 GET     /login                     controllers.LoginLogoutController.login
 POST    /validate                  controllers.LoginLogoutController.validate
-GET     /cockpit                   controllers.LoginLogoutController.cockpit
+GET     /cockpit                   controllers.CockpitController.cockpit
 GET     /logout                    controllers.LoginLogoutController.logout
 GET     /skinLesionsForm           controllers.CockpitController.skinLesionsForm
 POST    /skinLesions               controllers.CockpitController.skinLesions
