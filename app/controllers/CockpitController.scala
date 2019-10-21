@@ -5,11 +5,12 @@ import models.utilities.UserCredentialsUtilities.performAction
 import play.api.mvc.{AbstractController, ControllerComponents}
 import scala.concurrent.{ExecutionContext, Future}
 import models.utilities.Tmp.exams
-import models.utilities.ExaminationsUtilities.getExaminationFromClientRequestBody
+import play.api.libs.ws._
+import models.utilities.CustomConfig.customConfig
 
 
 @Singleton
-class CockpitController @Inject()(controllerComponents: ControllerComponents)(implicit executionContext: ExecutionContext)
+class CockpitController @Inject()(controllerComponents: ControllerComponents, wsClient: WSClient)(implicit executionContext: ExecutionContext)
   extends AbstractController(controllerComponents){
 
   import models.implicits.ExaminationsImplicits._
@@ -26,9 +27,8 @@ class CockpitController @Inject()(controllerComponents: ControllerComponents)(im
 
   def skinLesions = Action.async { implicit request =>
 
-    val skinLesionsClientInfo = getExaminationFromClientRequestBody(request)
-    println(skinLesionsClientInfo)
-    Future(Ok)
+    val futureResponse = wsClient.url(customConfig.skinLesionsUrl).post(request.body.asJson.get)
+    Future(Ok(views.html.cockpit(request.session.get("username").get, exams)))
   }
 
 
