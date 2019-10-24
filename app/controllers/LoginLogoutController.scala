@@ -11,7 +11,7 @@ import models.utilities.Tmp.exams
 
 
 @Singleton
-class LoginLogoutController @Inject()(userDao: UserDao, controllerComponents: ControllerComponents)(implicit executionContext: ExecutionContext)
+class LoginLogoutController @Inject()(userDao: UserDao, loggingAction: LoggingAction, controllerComponents: ControllerComponents)(implicit executionContext: ExecutionContext)
   extends AbstractController(controllerComponents) {
 
   import models.implicits.UserImplicits._
@@ -19,20 +19,20 @@ class LoginLogoutController @Inject()(userDao: UserDao, controllerComponents: Co
 
 
   def index = Action.async { implicit request =>
-
     performAction { _ =>
       Future(Ok(views.html.hidden(routes.CockpitController.cockpit().toString)))
     }(Future(Ok(views.html.hidden(routes.LoginLogoutController.login().toString))))
   }
 
   def login = Action.async { implicit request =>
-    Future(Ok(views.html.login(None)))
+    performAction { _ =>
+      Future(Ok(views.html.forbidden()))
+    }(Future(Ok(views.html.login(None))))
   }
 
   def validate = Action.async { implicit request =>
-
     performAction { _ =>
-      Future(Ok(views.html.cockpit(request.session.get("username").get, exams)))
+      Future(Ok(views.html.forbidden()))
     }({
       val requestVals = getUserCredentialsFromRequestBody(request)
       userDao

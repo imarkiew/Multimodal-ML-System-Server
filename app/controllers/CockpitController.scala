@@ -13,23 +13,22 @@ import models.utilities.CustomConfig.customConfig
 
 
 @Singleton
-class CockpitController @Inject()(examinationDao: ExaminationDao, controllerComponents: ControllerComponents, wsClient: WSClient)(implicit executionContext: ExecutionContext)
+class CockpitController @Inject()(examinationDao: ExaminationDao, loggingAction: LoggingAction, controllerComponents: ControllerComponents, wsClient: WSClient)(implicit executionContext: ExecutionContext)
   extends AbstractController(controllerComponents){
 
   import models.implicits.ExaminationsImplicits.examinationsNames
 
-  def cockpit = Action.async { implicit request =>
+  def cockpit = loggingAction.async { implicit request =>
     performAction { _ =>
       Future(Ok(views.html.cockpit(request.session.get("username").get, exams)))
     }(Future(Ok(views.html.login(None))))
   }
 
-  def skinLesionsForm = Action.async { implicit request =>
+  def skinLesionsForm = loggingAction.async { implicit request =>
     Future(Ok(views.html.examination("Skin lesions classifier")))
   }
 
-  def skinLesions = Action.async { implicit request =>
-
+  def skinLesions = loggingAction.async { implicit request =>
     val userName = request.session.get("username").get
     wsClient
       .url(customConfig.skinLesionsUrl)

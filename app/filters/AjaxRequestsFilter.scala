@@ -4,8 +4,7 @@ import javax.inject.Inject
 import akka.stream.Materializer
 import controllers.routes
 import play.api.mvc._
-import scala.concurrent.ExecutionContext
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import play.api.mvc.Results.Ok
 
 
