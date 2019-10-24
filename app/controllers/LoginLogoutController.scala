@@ -7,7 +7,6 @@ import models.utilities.UserCredentialsUtilities.{getUserCredentialsFromRequestB
 import play.api.mvc.{AbstractController, ControllerComponents}
 import scala.concurrent.{ExecutionContext, Future}
 import org.mindrot.jbcrypt.BCrypt.checkpw
-import models.utilities.Tmp.exams
 
 
 @Singleton
@@ -15,8 +14,6 @@ class LoginLogoutController @Inject()(userDao: UserDao, loggingAction: LoggingAc
   extends AbstractController(controllerComponents) {
 
   import models.implicits.UserImplicits._
-  import models.implicits.ExaminationsImplicits._
-
 
   def index = Action.async { implicit request =>
     performAction { _ =>
@@ -38,7 +35,7 @@ class LoginLogoutController @Inject()(userDao: UserDao, loggingAction: LoggingAc
       userDao
         .getUser(requestVals.username.get)
         .map {
-          case Some(user: User) if checkpw(requestVals.password.get, user.passwordHash) => Ok(views.html.cockpit(user.username, exams))
+          case Some(user: User) if checkpw(requestVals.password.get, user.passwordHash) => Redirect(routes.CockpitController.cockpit())
             .withSession("username" -> user.username, "Csrf-Token" -> play.filters.csrf.CSRF.getToken.get.value)
           case _ => Ok(views.html.login(Some("Invalid username or password")))
         }

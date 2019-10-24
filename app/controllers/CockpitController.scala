@@ -3,13 +3,12 @@ package controllers
 import javax.inject.{Inject, Singleton}
 import models.dao.ExaminationDao
 import models.dto.ExaminationView
-import models.utilities.UserCredentialsUtilities.performAction
 import play.api.mvc.{AbstractController, ControllerComponents}
 import play.api.http.{Status => HttpStatus}
 import scala.concurrent.{ExecutionContext, Future}
-import models.utilities.Tmp.exams
 import play.api.libs.ws._
 import models.utilities.CustomConfig.customConfig
+import play.api.libs.json.{JsObject, Json}
 
 
 @Singleton
@@ -19,9 +18,11 @@ class CockpitController @Inject()(examinationDao: ExaminationDao, loggingAction:
   import models.implicits.ExaminationsImplicits.examinationsNames
 
   def cockpit = loggingAction.async { implicit request =>
-    performAction { _ =>
-      Future(Ok(views.html.cockpit(request.session.get("username").get, exams)))
-    }(Future(Ok(views.html.login(None))))
+    val username = request.session.get("username").get
+    examinationDao
+      .getAllExaminationsFromUser(username)
+      .map(x => Ok(views.html.cockpit(username, x.map(ExaminationView(_)))))
+      .recover { case _ => Ok(views.html.exception("Internal exception"))}
   }
 
   def skinLesionsForm = loggingAction.async { implicit request =>
@@ -29,20 +30,16 @@ class CockpitController @Inject()(examinationDao: ExaminationDao, loggingAction:
   }
 
   def skinLesions = loggingAction.async { implicit request =>
-    val userName = request.session.get("username").get
+    val jsonRequest = request.body.asJson.get.as[JsObject] + ("username" -> Json.parse(request.session.get("username").get))
     wsClient
       .url(customConfig.skinLesionsUrl)
-      .post(request.body.asJson.get)
-      .flatMap {response =>
+      .post(jsonRequest)
+      .map {response =>
         if(response.status == HttpStatus.OK){
-          examinationDao
-            .getAllExaminationsFromUser(userName)
-            .map(examinations => Ok(views.html.cockpit(userName, examinations.map(ExaminationView(_)))))
+          Redirect(routes.CockpitController.cockpit())
         } else {
-          Future(Ok(views.html.exception("Internal exception")))
+          Ok(views.html.exception("Internal exception"))
         }
       }
   }
-
-
 }
