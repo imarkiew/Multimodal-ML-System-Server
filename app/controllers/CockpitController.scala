@@ -1,8 +1,11 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
+import models.dao.ExaminationDao
+import models.dto.ExaminationView
 import models.utilities.UserCredentialsUtilities.performAction
 import play.api.mvc.{AbstractController, ControllerComponents}
+import play.api.http.{Status => HttpStatus}
 import scala.concurrent.{ExecutionContext, Future}
 import models.utilities.Tmp.exams
 import play.api.libs.ws._
@@ -10,10 +13,10 @@ import models.utilities.CustomConfig.customConfig
 
 
 @Singleton
-class CockpitController @Inject()(controllerComponents: ControllerComponents, wsClient: WSClient)(implicit executionContext: ExecutionContext)
+class CockpitController @Inject()(examinationDao: ExaminationDao, controllerComponents: ControllerComponents, wsClient: WSClient)(implicit executionContext: ExecutionContext)
   extends AbstractController(controllerComponents){
 
-  import models.implicits.ExaminationsImplicits._
+  import models.implicits.ExaminationsImplicits.examinationsNames
 
   def cockpit = Action.async { implicit request =>
     performAction { _ =>
@@ -27,8 +30,19 @@ class CockpitController @Inject()(controllerComponents: ControllerComponents, ws
 
   def skinLesions = Action.async { implicit request =>
 
-    val futureResponse = wsClient.url(customConfig.skinLesionsUrl).post(request.body.asJson.get)
-    Future(Ok(views.html.cockpit(request.session.get("username").get, exams)))
+    val userName = request.session.get("username").get
+    wsClient
+      .url(customConfig.skinLesionsUrl)
+      .post(request.body.asJson.get)
+      .flatMap {response =>
+        if(response.status == HttpStatus.OK){
+          examinationDao
+            .getAllExaminationsFromUser(userName)
+            .map(examinations => Ok(views.html.cockpit(userName, examinations.map(ExaminationView(_)))))
+        } else {
+          Future(Ok(views.html.exception("Internal exception")))
+        }
+      }
   }
 
 

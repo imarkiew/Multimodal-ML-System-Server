@@ -1,3 +1,3 @@
 package models.dto
 
-case class Examination(id: Long, kind: String, title: Option[String], date: String, results: Map[String, Double])
+case class Examination(id: Long, kind: String, title: Option[String], date: String, results: Map[String, String], path: String, username: String)
