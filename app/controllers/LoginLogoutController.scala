@@ -13,7 +13,7 @@ import org.mindrot.jbcrypt.BCrypt.checkpw
 class LoginLogoutController @Inject()(userDao: UserDao, loggingAction: LoggingAction, controllerComponents: ControllerComponents)(implicit executionContext: ExecutionContext)
   extends AbstractController(controllerComponents) {
 
-  import models.implicits.UserImplicits._
+  import models.implicits.UserImplicits.userCredentialsReader
 
   def index = Action.async { implicit request =>
     performAction { _ =>

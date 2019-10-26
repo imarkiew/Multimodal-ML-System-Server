@@ -8,7 +8,7 @@ import play.api.http.{Status => HttpStatus}
 import scala.concurrent.{ExecutionContext, Future}
 import play.api.libs.ws._
 import models.utilities.CustomConfig.customConfig
-import play.api.libs.json.{JsObject, Json}
+import play.api.libs.json.{JsObject, JsString}
 
 
 @Singleton
@@ -30,7 +30,7 @@ class CockpitController @Inject()(examinationDao: ExaminationDao, loggingAction:
   }
 
   def skinLesions = loggingAction.async { implicit request =>
-    val jsonRequest = request.body.asJson.get.as[JsObject] + ("username" -> Json.parse(request.session.get("username").get))
+    val jsonRequest = request.body.asJson.get.as[JsObject] + ("username" -> JsString(request.session.get("username").get))
     wsClient
       .url(customConfig.skinLesionsUrl)
       .post(jsonRequest)
