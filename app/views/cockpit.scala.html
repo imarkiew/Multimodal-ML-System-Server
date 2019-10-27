@@ -23,13 +23,14 @@
 </select>
 
 <table>
-    <tr>
+    <thead>
         <th>id</th>
         <th>kind</th>
         <th>title</th>
         <th>date</th>
         <th>results</th>
-    </tr>
+    </thead>
+    <tbody>
     @for(examinationResult <- examinationsResults) {
         <tr>
             <td>@examinationResult.id</td>
@@ -47,4 +48,5 @@
             </td>
         </tr>
     }
+    </tbody>
 </table>

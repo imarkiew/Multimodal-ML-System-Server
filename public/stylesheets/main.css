@@ -156,18 +156,36 @@ table {
 }
 
 th, td {
-    text-align: left;
     padding: 5px;
-    word-wrap:break-word;
+    word-wrap: break-word;
 }
-
-tr:nth-child(even){background-color: #f2f2f2}
-tr:nth-child(odd){background-color: lightgrey}
 
 th {
     background-color: #4CAF50;
     color: white;
+    text-align: center;
 }
+
+thead {
+    display: table;
+    width: 100%;
+}
+
+tbody {
+    height: 720px;
+    overflow: auto;
+    display: block;
+    width: 100%;
+}
+
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(odd){background-color: lightgrey}
 
 /*Adapted example from https://css-tricks.com/styling-a-select-like-its-2019/*/
 .select-css {
