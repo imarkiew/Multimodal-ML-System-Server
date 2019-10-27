@@ -21,7 +21,7 @@ class CockpitController @Inject()(examinationDao: ExaminationDao, loggingAction:
     val username = request.session.get("username").get
     examinationDao
       .getAllExaminationsFromUser(username)
-      .map(x => Ok(views.html.cockpit(username, x.map(ExaminationView(_)))))
+      .map(x => Ok(views.html.cockpit(username, x.sorted.map(ExaminationView(_)))))
       .recover { case _ => Ok(views.html.exception("Internal exception"))}
   }
 

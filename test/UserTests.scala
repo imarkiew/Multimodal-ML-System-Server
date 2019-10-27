@@ -4,7 +4,7 @@ import play.api.libs.json.Json
 import play.api.test._
 
 
-object UserImplicitConversionTest extends PlaySpecification {
+object UserTests extends PlaySpecification {
 
   import models.implicits.UserImplicits.userCredentialsReader
 
