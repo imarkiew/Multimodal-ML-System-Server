@@ -76,6 +76,7 @@ returnToCockpit = () => {
 performSkinLesions = () => {
 
     $("#okButton").prop("disabled", true).trigger("change");
+    $("#cancelButton").prop("disabled", true).trigger("change");
     $("#processingInfo").show();
 
     const title = $("#skinLesionTitle").val();
