@@ -15,7 +15,7 @@ import play.api.libs.json.{JsObject, JsString}
 class CockpitController @Inject()(examinationDao: ExaminationDao, loggingAction: LoggingAction, controllerComponents: ControllerComponents, wsClient: WSClient)(implicit executionContext: ExecutionContext)
   extends AbstractController(controllerComponents){
 
-  import models.implicits.ExaminationsImplicits.examinationsNames
+  import models.implicits.ExaminationsImplicits.examinationNames
 
   def cockpit = loggingAction.async { implicit request =>
     val username = request.session.get("username").get
