@@ -42,4 +42,12 @@ class CockpitController @Inject()(examinationDao: ExaminationDao, loggingAction:
         }
       }
   }
+
+  def breastCancerForm = loggingAction.async { implicit request =>
+    Future(Ok(views.html.examination("Brest cancer classifier")))
+  }
+
+  def breastCancer = loggingAction.async { implicit request =>
+    Future(Ok)
+  }
 }

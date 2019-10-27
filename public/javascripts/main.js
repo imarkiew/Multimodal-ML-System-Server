@@ -4,10 +4,13 @@ const validateRoute = $("#validateRoute").val();
 const cockpitRoute = $("#cockpitRoute").val();
 const skinLesionsFormRoute = $("#skinLesionsFormRoute").val();
 const skinLesionsRoute = $("#skinLesionsRoute").val();
+const breastCancerFormRoute = $("#breastCancerFormRoute").val();
+const breastCancerRoute = $("#breastCancerRoute").val();
 
 
 $("#content").load(loginRoute);
 
+var selectedAction = null;
 
 login = () => {
 
@@ -35,11 +38,21 @@ login = () => {
 
 $(document).on("change", "#examinationsDropdown", () => {
 
-    const selectedAction = $("#examinationsDropdown option:selected").text();
+    selectedAction = $("#examinationsDropdown option:selected").text();
 
     if(selectedAction === "skin-lesions") {
         $.ajax({
             url: skinLesionsFormRoute,
+            type: 'GET',
+            dataType: 'html',
+            async: true,
+            success: data => {
+                $("#content").html(data);
+            }
+        })
+    } else if(selectedAction === "breast-cancer") {
+        $.ajax({
+            url: breastCancerFormRoute,
             type: 'GET',
             dataType: 'html',
             async: true,
@@ -52,8 +65,8 @@ $(document).on("change", "#examinationsDropdown", () => {
     }
 });
 
-$(document).on("change", "#skinLesionFile", () => {
-    if($("#skinLesionFile").val() === ''){
+$(document).on("change", "#file", () => {
+    if($("#file").val() === ''){
         $("#okButton").prop("disabled", true).trigger("change");
     }
     else{
@@ -73,18 +86,25 @@ returnToCockpit = () => {
     })
 };
 
-performSkinLesions = () => {
+performExamination = () => {
 
     $("#okButton").prop("disabled", true).trigger("change");
     $("#cancelButton").prop("disabled", true).trigger("change");
     $("#processingInfo").show();
 
-    const title = $("#skinLesionTitle").val();
+    const title = $("#title").val();
     const date = new Date();
-    const image = $("#skinLesionFile")[0].files[0];
+    const image = $("#file")[0].files[0];
     const fileName = image.name;
     const reader = new FileReader();
     reader.readAsDataURL(image);
+    var urlRout = null;
+
+    if(selectedAction === "skin-lesions"){
+        urlRout = skinLesionsRoute;
+    } else if (selectedAction === "breast-cancer") {
+        urlRout = breastCancerRoute;
+    }
 
     reader.onloadend = () => {
 
@@ -98,7 +118,7 @@ performSkinLesions = () => {
 
         $.ajax({
             type: 'POST',
-            url: skinLesionsRoute,
+            url: urlRout,
             data: JSON.stringify({title, date, fileName, content}),
             contentType: 'application/json; charset=utf-8',
             dataType: 'html',

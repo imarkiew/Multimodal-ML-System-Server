@@ -1,21 +1,21 @@
 @(title: String)
 
-<div class="skin-lesions-form text font-size">
+<div class="examination-form text font-size">
     <div class="center-horizontally-title">
         <b>@title</b>
     </div>
     <br></br>
     <div>
-        Your title for the examination: <input type="text" id="skinLesionTitle">
+        Your title for the examination: <input type="text" id="title">
     </div>
     <div>
-        Choose your file: <input type="file" id="skinLesionFile">
+        Choose your file: <input type="file" id="file">
     </div>
     <div class="cancel-button">
         <input type="button" id="cancelButton" value="Cancel" class="btn btn-info btn-lg" onclick="returnToCockpit()">
     </div>
     <div class="ok-button">
-        <input type="button" id="okButton" value="Ok" class="btn btn-info btn-lg" disabled onclick="performSkinLesions()">
+        <input type="button" id="okButton" value="Ok" class="btn btn-info btn-lg" disabled onclick="performExamination()">
     </div>
     <div class="processing-message" id="processingInfo">
         <h4>Processing in progress, please stand by</h4>

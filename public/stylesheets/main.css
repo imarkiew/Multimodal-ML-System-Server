@@ -230,7 +230,7 @@ tr:nth-child(odd){background-color: lightgrey}
     font-weight:normal;
 }
 
-.skin-lesions-form {
+.examination-form {
     height: 35%;
     width: 36%;
     position: absolute;
