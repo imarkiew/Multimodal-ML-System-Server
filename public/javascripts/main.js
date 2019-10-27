@@ -52,12 +52,12 @@ $(document).on("change", "#examinationsDropdown", () => {
     }
 });
 
-$(document).on("change", "#skinLesionFile", function(){
+$(document).on("change", "#skinLesionFile", () => {
     if($("#skinLesionFile").val() === ''){
-        $("#ok-button").prop("disabled", true).trigger("change");
+        $("#okButton").prop("disabled", true).trigger("change");
     }
     else{
-        $("#ok-button").prop("disabled", false).trigger("change");
+        $("#okButton").prop("disabled", false).trigger("change");
     }
 });
 
@@ -75,6 +75,9 @@ returnToCockpit = () => {
 
 performSkinLesions = () => {
 
+    $("#okButton").prop("disabled", true).trigger("change");
+    $("#processingInfo").show();
+
     const title = $("#skinLesionTitle").val();
     const date = new Date();
     const image = $("#skinLesionFile")[0].files[0];
@@ -82,7 +85,7 @@ performSkinLesions = () => {
     const reader = new FileReader();
     reader.readAsDataURL(image);
 
-    reader.onloadend = function() {
+    reader.onloadend = () => {
 
         const content = reader.result;
 
