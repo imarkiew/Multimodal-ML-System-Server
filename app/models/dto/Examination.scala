@@ -1,7 +1,7 @@
 package models.dto
 
-import java.text.SimpleDateFormat
-import java.util.Date
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.DateTime
 
 
 case class Examination(id: Long,
@@ -15,6 +15,6 @@ case class Examination(id: Long,
     stringToDateTime(that.date) compareTo stringToDateTime(this.date)
   }
 
-  private def stringToDateTime(string: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"): Date =
-    new SimpleDateFormat(format).parse(string)
+  private def stringToDateTime(string: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"): DateTime =
+    DateTimeFormat.forPattern(format).parseDateTime(string)
 }
