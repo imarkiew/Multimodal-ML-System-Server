@@ -5,7 +5,7 @@ import com.typesafe.config.ConfigFactory
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 
 
-case class CustomConfig(examinations: Seq[String], skinLesionsUrl: String)
+case class CustomConfig(examinations: Seq[String], skinLesionsUrl: String, breastCancerUrl: String)
 
 object CustomConfig {
 
