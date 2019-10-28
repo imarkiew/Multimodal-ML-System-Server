@@ -3,9 +3,8 @@ const loginRoute = $("#loginRoute").val();
 const validateRoute = $("#validateRoute").val();
 const cockpitRoute = $("#cockpitRoute").val();
 const skinLesionsFormRoute = $("#skinLesionsFormRoute").val();
-const skinLesionsRoute = $("#skinLesionsRoute").val();
 const breastCancerFormRoute = $("#breastCancerFormRoute").val();
-const breastCancerRoute = $("#breastCancerRoute").val();
+const mlServiceRoute = $("#mlServiceRoute").val();
 
 
 $("#content").load(loginRoute);
@@ -98,12 +97,12 @@ performExamination = () => {
     const fileName = image.name;
     const reader = new FileReader();
     reader.readAsDataURL(image);
-    var urlRout = null;
+    var typeOfMLService = null;
 
     if(selectedAction === "skin-lesions"){
-        urlRout = skinLesionsRoute;
+        typeOfMLService = "skinLesionsUrl";
     } else if (selectedAction === "breast-cancer") {
-        urlRout = breastCancerRoute;
+        typeOfMLService = "breastCancerUrl";
     }
 
     reader.onloadend = () => {
@@ -118,8 +117,8 @@ performExamination = () => {
 
         $.ajax({
             type: 'POST',
-            url: urlRout,
-            data: JSON.stringify({title, date, fileName, content}),
+            url: mlServiceRoute,
+            data: JSON.stringify({typeOfMLService, title, date, fileName, content}),
             contentType: 'application/json; charset=utf-8',
             dataType: 'html',
             async: true,

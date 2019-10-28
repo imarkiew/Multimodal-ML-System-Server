@@ -8,9 +8,8 @@ POST    /validate                  controllers.LoginLogoutController.validate
 GET     /cockpit                   controllers.CockpitController.cockpit
 GET     /logout                    controllers.LoginLogoutController.logout
 GET     /skinLesionsForm           controllers.CockpitController.skinLesionsForm
-POST    /skinLesions               controllers.CockpitController.skinLesions
 GET     /breastCancerForm          controllers.CockpitController.breastCancerForm
-POST    /breastCancer              controllers.CockpitController.breastCancer
+POST    /mlService                 controllers.CockpitController.mlService
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /versionedAssets/*file        controllers.Assets.versioned(path="/public", file: Asset)
