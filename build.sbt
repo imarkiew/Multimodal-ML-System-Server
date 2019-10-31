@@ -21,7 +21,6 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "8.0.17",
   "org.mindrot" % "jbcrypt" % "0.4",
   "com.iheart" %% "ficus" % "1.4.7",
-  "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test,
   "com.typesafe.scala-logging" % "scala-logging_2.11" % "3.9.0"
 )
 
