@@ -29,6 +29,9 @@ assemblyMergeStrategy in assembly := {
     // We don't need manifest files since sbt-assembly will create
     // one with the given settings
     MergeStrategy.discard
+  case PathList("javax", _ @ _*) =>
+    //  pick the first of the matching files in classpath order
+    MergeStrategy.first
   case referenceOverrides if referenceOverrides.contains("reference-overrides.conf") =>
     // Keep the content for all reference-overrides.conf files
     MergeStrategy.concat
