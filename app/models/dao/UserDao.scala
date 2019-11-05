@@ -7,6 +7,11 @@ import models.dto.User
 import scala.concurrent.{ExecutionContext, Future}
 
 
+/** DAO for working with users
+  *
+  * @param dbConfigProvider
+  * @param executionContext
+  */
 class UserDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)(implicit executionContext: ExecutionContext) extends HasDatabaseConfigProvider[JdbcProfile]{
 
   import profile.api._

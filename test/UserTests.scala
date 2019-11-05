@@ -4,6 +4,9 @@ import play.api.libs.json.Json
 import play.api.test._
 
 
+/** Object with tests for users
+  *
+  */
 object UserTests extends PlaySpecification {
 
   import models.implicits.UserImplicits.userCredentialsReader

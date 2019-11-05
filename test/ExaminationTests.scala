@@ -2,6 +2,9 @@ import models.dto.Examination
 import play.api.test._
 
 
+/** Object with test for examinations
+  *
+  */
 object ExaminationTests extends PlaySpecification {
 
   import models.implicits.ExaminationsImplicits.{examinationResultsStringAsJsonToMap, examinationResultsMapToStringAsJson}
