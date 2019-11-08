@@ -17,12 +17,40 @@ class ExaminationDao @Inject()(protected val dbConfigProvider: DatabaseConfigPro
   import profile.api._
   import models.implicits.ExaminationsImplicits.{examinationResultsStringAsJsonToMap, examinationResultsMapToStringAsJson}
 
+
+  /** TableQuery which represents operations on database
+    *
+    */
   private val examinations = TableQuery[ExaminationsTable]
 
+
+  /** Get specific examination by id
+    *
+    * @param id
+    * @return Future[Option[Examination]]
+    */
   def getExamination(id: Long): Future[Option[Examination]] = db.run(examinations.filter(_.id === id).result.headOption)
+
+
+  /** Get all examinations for specific user
+    *
+    * @param username
+    * @return Future[Seq[Examination]]
+    */
   def getAllExaminationsFromUser(username: String): Future[Seq[Examination]] = db.run(examinations.filter(_.username === username).result)
+
+
+  /** Get all examinations
+    *
+    * @return Future[Seq[Examination]]
+    */
   def getAll: Future[Seq[Examination]] = db.run(examinations.result)
 
+
+  /** Class which represents entity of examinations in database
+    *
+    * @param tag - tag for table for internal usage
+    */
   private class ExaminationsTable(tag: Tag) extends Table[Examination](tag, "examinations") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def kind = column[String]("kind")

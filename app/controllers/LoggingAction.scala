@@ -19,7 +19,7 @@ class LoggingAction @Inject()(parser: BodyParsers.Default)(implicit executionCon
     * @param request
     * @param block
     * @tparam A
-    * @return
+    * @return Future[Result]
     */
   override def invokeBlock[A](request: Request[A], block: Request[A] => Future[Result]): Future[Result] = {
 
