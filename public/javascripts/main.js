@@ -18,16 +18,16 @@ login = () => {
 
     $.ajaxSetup({
         beforeSend: xhr => {
-            xhr.setRequestHeader('Csrf-Token', csrfToken);
+            xhr.setRequestHeader("Csrf-Token", csrfToken);
         }
     });
 
     $.ajax({
         url: validateRoute,
-        type: 'POST',
+        type: "POST",
         data: JSON.stringify({ username, password }),
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'html',
+        contentType: "application/json; charset=utf-8",
+        dataType: "html",
         async: true,
         success: data => {
             $("#content").html(data);
@@ -42,8 +42,8 @@ $(document).on("change", "#examinationsDropdown", () => {
     if(selectedAction === "skin-lesions") {
         $.ajax({
             url: skinLesionsFormRoute,
-            type: 'GET',
-            dataType: 'html',
+            type: "GET",
+            dataType: "html",
             async: true,
             success: data => {
                 $("#content").html(data);
@@ -52,8 +52,8 @@ $(document).on("change", "#examinationsDropdown", () => {
     } else if(selectedAction === "breast-cancer") {
         $.ajax({
             url: breastCancerFormRoute,
-            type: 'GET',
-            dataType: 'html',
+            type: "GET",
+            dataType: "html",
             async: true,
             success: data => {
                 $("#content").html(data);
@@ -65,7 +65,7 @@ $(document).on("change", "#examinationsDropdown", () => {
 });
 
 $(document).on("change", "#file", () => {
-    if($("#file").val() === ''){
+    if($("#file").val() === ""){
         $("#okButton").prop("disabled", true).trigger("change");
     }
     else{
@@ -76,8 +76,8 @@ $(document).on("change", "#file", () => {
 returnToCockpit = () => {
     $.ajax({
         url: cockpitRoute,
-        type: 'GET',
-        dataType: 'html',
+        type: "GET",
+        dataType: "html",
         async: true,
         success: data => {
             $("#content").html(data);
@@ -111,16 +111,17 @@ performExamination = () => {
 
         $.ajaxSetup({
             beforeSend: xhr => {
-                xhr.setRequestHeader('Csrf-Token', csrfToken);
+                console.log(csrfToken);
+                xhr.setRequestHeader("Csrf-Token", csrfToken);
             }
         });
 
         $.ajax({
-            type: 'POST',
+            type: "POST",
             url: mlServiceRoute,
             data: JSON.stringify({typeOfMLService, title, date, fileName, content}),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'html',
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
             async: true,
             success: (data) => {
                 $("#content").html(data);
