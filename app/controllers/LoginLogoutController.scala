@@ -63,7 +63,7 @@ class LoginLogoutController @Inject()(userDao: UserDao, controllerComponents: Co
         .getUser(requestVals.username.get)
         .map {
           case Some(user: User) if checkpw(requestVals.password.get, user.passwordHash) => Redirect(routes.CockpitController.cockpit())
-            .withSession("username" -> user.username, "Csrf-Token" -> play.filters.csrf.CSRF.getToken.get.value)
+            .addingToSession("username" -> user.username, "Csrf-Token" -> play.filters.csrf.CSRF.getToken.get.value)
           case _ => Ok(views.html.login(Some("Invalid username or password")))
         }
         .recover { case _ => Ok(views.html.exception("Internal exception"))}
