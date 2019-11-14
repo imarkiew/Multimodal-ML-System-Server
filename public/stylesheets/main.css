@@ -237,7 +237,9 @@ tr:nth-child(odd){background-color: lightgrey}
     top: 50%;
     left: 50%;
     margin-right: -50%;
-    background-color: gray;
+    background-color: #797979;
+    border: 5px solid #FF851B;
+    border-radius: 50px;
     transform: translate(-50%, -50%);
 }
 
