@@ -1,4 +1,4 @@
-@(title: String)
+@(title: String, additionalInfo: Option[String])
 
 <div class="examination-form text font-size">
     <div class="center-horizontally-title">
@@ -19,5 +19,16 @@
     </div>
     <div class="processing-message" id="processingInfo">
         <h4>Processing in progress, please stand by</h4>
+    </div>
+    <a class="additional-info-btn" href="#additional-info">
+        <span class="info-sign">&#x1F6C8</span>
+    </a>
+</div>
+
+<div id="additional-info" class="overlay">
+    <div class="popup">
+        <h2>Requirements for input data</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">@additionalInfo</div>
     </div>
 </div>

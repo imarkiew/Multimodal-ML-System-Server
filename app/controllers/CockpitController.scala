@@ -3,7 +3,8 @@ package controllers
 import javax.inject.{Inject, Singleton}
 import models.dao.ExaminationDao
 import models.dto.ExaminationView
-import play.api.mvc.{Action, AbstractController, AnyContent, ControllerComponents}
+import models.utilities.AdditionalInfo._
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents}
 import play.api.http.{Status => HttpStatus}
 import scala.concurrent.{ExecutionContext, Future}
 import play.api.libs.ws._
@@ -48,7 +49,7 @@ class CockpitController @Inject()(examinationDao: ExaminationDao, loggingAction:
     * @return Action[AnyContent]
     */
   def skinLesionsForm: Action[AnyContent] = loggingAction.async { implicit request =>
-    Future(Ok(views.html.examination("Skin lesions classifier")))
+    Future(Ok(views.html.examination("Skin lesions classifier", skinLesionRequirements)))
   }
 
 
@@ -57,7 +58,7 @@ class CockpitController @Inject()(examinationDao: ExaminationDao, loggingAction:
     * @return Action[AnyContent]
     */
   def breastCancerForm: Action[AnyContent] = loggingAction.async { implicit request =>
-    Future(Ok(views.html.examination("Brest cancer classifier")))
+    Future(Ok(views.html.examination("Brest cancer classifier", breastCancerRequirements)))
   }
 
 
