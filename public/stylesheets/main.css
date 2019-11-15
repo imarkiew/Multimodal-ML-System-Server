@@ -263,8 +263,8 @@ tr:nth-child(odd){background-color: lightgrey}
 /*Adapted example from https://codepen.io/imprakash/pen/GgNMXO */
 .additional-info-btn {
     position: absolute;
-    top: -2%;
-    right: 25%;
+    top: -10px;
+    right: -20%;
     color: #fff;
     text-decoration: none;
     cursor: pointer;
