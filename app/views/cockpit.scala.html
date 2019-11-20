@@ -3,50 +3,52 @@
 
 @(username: String, examinationsResults: Seq[ExaminationView])(implicit request: RequestHeader, examinations: Seq[String])
 
-<div class="topright">
-    <div class="text">
-        Logged as: <b>@username</b>
+<div class="examination-card">
+    <div class="topright">
+        <div class="text">
+            Logged as: <b>@username</b>
+        </div>
     </div>
+
+    <div class="logout-button">
+        <a href="@routes.LoginLogoutController.logout()">
+            <input type="button" value="Logout" class="btn btn-info btn-lg">
+        </a>
+    </div>
+
+    <select class="select-css" id="examinationsDropdown">
+        <option style="display:none;" selected>Add new examination</option>
+        @for(examination <- examinations){
+            <option>@examination</option>
+        }
+    </select>
+
+    <table>
+        <thead>
+            <th>id</th>
+            <th>kind</th>
+            <th>title</th>
+            <th>date</th>
+            <th>results</th>
+        </thead>
+        <tbody>
+        @for(examinationResult <- examinationsResults) {
+            <tr>
+                <td>@examinationResult.id</td>
+                <td>@examinationResult.kind</td>
+                <td>@examinationResult.title</td>
+                <td>@examinationResult.date</td>
+                <td>
+                    <ul>
+                        @for(result <- examinationResult.results) {
+                            <li>
+                            @result._1 - @result._2 %
+                            </li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
 </div>
-
-<div class="logout-button">
-    <a href="@routes.LoginLogoutController.logout()">
-        <input type="button" value="Logout" class="btn btn-info btn-lg">
-    </a>
-</div>
-
-<select class="select-css" id="examinationsDropdown">
-    <option style="display:none;" selected>Add new examination</option>
-    @for(examination <- examinations){
-        <option>@examination</option>
-    }
-</select>
-
-<table>
-    <thead>
-        <th>id</th>
-        <th>kind</th>
-        <th>title</th>
-        <th>date</th>
-        <th>results</th>
-    </thead>
-    <tbody>
-    @for(examinationResult <- examinationsResults) {
-        <tr>
-            <td>@examinationResult.id</td>
-            <td>@examinationResult.kind</td>
-            <td>@examinationResult.title</td>
-            <td>@examinationResult.date</td>
-            <td>
-                <ul>
-                    @for(result <- examinationResult.results) {
-                        <li>
-                        @result._1 - @result._2 %
-                        </li>
-                    }
-                </ul>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
