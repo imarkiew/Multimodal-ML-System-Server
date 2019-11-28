@@ -10,13 +10,23 @@ written using Python, Flask, SQLAlchemy, Scala
 
 Most services are used together with Docker and Docker Compose. MySQL 8.x was used as database.
 
-<img src="https://github.com/imarkiew/Multimodal-ML-System-Server/tree/master/readme-content/systemSchema.pdf" width="100%" height="100%">
+<p align="center">
+<img src="./readme-content/systemSchema.png" width="75%" height="75%">
+</p>
 The green color is Docker Compose and the blue is instance that serves the system (Google Cloud Engine was used)
 
-<img src="https://github.com/imarkiew/Multimodal-ML-System-Server/tree/master/readme-content/databaseUML.pdf" width="100%" height="100%">
+<p align="center">
+<img src="./readme-content/databaseUML.png" width="75%" height="75%">
+</p>
 
-<img src="https://github.com/imarkiew/Multimodal-ML-System-Server/tree/master/readme-content/frontend1.png" width="100%" height="100%">
+<p align="center">
+<img src="./readme-content/frontend1.png" width="85%" height="85%">
+</p>
 
-<img src="https://github.com/imarkiew/Multimodal-ML-System-Server/tree/master/readme-content/frontend3.png" width="100%" height="100%">
+<p align="center">
+<img src="./readme-content/frontend3.png" width="85%" height="85%">
+</p>
 
-<img src="https://github.com/imarkiew/Multimodal-ML-System-Server/tree/master/readme-content/frontend4.png" width="50%" height="50%">
+<p align="center">
+<img src="./readme-content/frontend4.png" width="85%" height="85%">
+</p>
