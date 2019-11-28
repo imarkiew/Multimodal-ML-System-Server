@@ -13,7 +13,8 @@ Most services are used together with Docker and Docker Compose. MySQL 8.x was us
 <p align="center">
 <img src="./readme-content/systemSchema.png" width="75%" height="75%">
 </p>
-The green color is Docker Compose and the blue is instance that serves the system (Google Cloud Engine was used)
+
+**The green color is Docker Compose and the blue is instance that serves the system (Google Cloud Engine was used)**
 
 <p align="center">
 <img src="./readme-content/databaseUML.png" width="75%" height="75%">
