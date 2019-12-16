@@ -93,10 +93,10 @@ performExamination = () => {
 
     const title = $("#title").val();
     const date = new Date();
-    const image = $("#file")[0].files[0];
-    const fileName = image.name;
+    const file = $("#file")[0].files[0];
+    const fileName = file.name;
     const reader = new FileReader();
-    reader.readAsDataURL(image);
+    reader.readAsDataURL(file);
     var typeOfMLService = null;
 
     if(selectedAction === "skin-lesions"){
